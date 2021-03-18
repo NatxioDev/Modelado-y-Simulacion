@@ -41,7 +41,6 @@ GLD = 5  # Dividendo
 
 
 if (beta0 != 0 and beta1 != 0):
-    print("Se acepta la hipotesis nula")
 
     F = ((SEC/GLN) / (SRC / GLD))
 
@@ -53,4 +52,4 @@ if (beta0 != 0 and beta1 != 0):
         print("Se acepta la hipotesis nula y se rechaza la hipotesis alterna")
 else:
 
-    print("Se rechaza la hipotesis nula")
+    print("Se rechaza la hipotesis alterna y se acepta la nula")
