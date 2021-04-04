@@ -6,13 +6,19 @@ data = pd.read_excel("./datac.xlsx")
 Q = 15
 
 lambdaArray = np.array([])
+lambdaArray2 = np.array([])
 X = np.array(data)
+X2 = np.array(data)
 Y = np.array(data)
+Y2 = np.array(data)
 
 T = len(data)
 X = np.delete(X, len(X)-1, axis=0)
 Y = np.delete(Y, 0, axis=0)
+X2 = np.delete(X2, len(X2)-1, axis=0)
+Y2 = np.delete(Y2, 0, axis=0)
 YT = 0
+YT2 = 0
 
 
 for i in range(1, Q+1, 1):

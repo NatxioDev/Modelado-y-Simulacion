@@ -3,40 +3,32 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 data = pd.read_excel("./datac.xlsx")
-Q = 15
-
+Q = 5
 lambdaArray = np.array([])
-X = np.array(data)
-Y = np.array(data)
-
 T = len(data)
-X = np.delete(X, len(X)-1, axis=0)
-Y = np.delete(Y, 0, axis=0)
-YT = 0
+i = 1
+Y = data.iloc[Q:, :]
+lenData = len(data)
 
-
-for i in range(1, Q+1, 1):
+while len(Y) > Q:
     print("Iteracion :", i)
-    COVXY = ((X - X.mean()).sum() * (Y - Y.mean()).sum()) / len(Y)
+    Y = data.iloc[i:, :]
+    X = data.iloc[:lenData-i, :]
+    X = np.array(X)
+    X = np.insert(X, 0, 1, axis=1)
+    Y = np.array(Y)
+    Y = np.transpose(Y)
+    COVXY = ((X - X.mean()).sum() * (Y - Y.mean()).sum()) / lenData
     print("Covarianza", COVXY)
 
+    if(COVXY == 0):
+        break
 
-    XT = np.transpose(X)
-    C = np.linalg.inv(np.matmul(XT,X))
-    XT_x_Y = np.matmul(XT,Y)
-    BetaS = np.matmul(C,XT_x_Y)
-    lambdaArray = np.append(lambdaArray, BetaS)
-    YT = YT + (BetaS * X[0])
+    Y = data.iloc[i:, :]
+    X = data.iloc[:lenData-i, :]
+    i = i + 1
 
 
-    X = np.delete(X, len(X)-1, axis=0)
-    Y = np.delete(Y, 0, axis=0)
-
-t = []
-for e in range(0, len(lambdaArray), 1):
-    t.append(i+1)
-
-plt.plot(t, lambdaArray)
 # Y = np.array(DataY)
 
 # X = np.array(DataX)
@@ -64,3 +56,12 @@ plt.plot(t, lambdaArray)
 
 # print("Betas: ", BetaS)
 # print("Y estimado: ", YS)
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+plt.close("all")
+data = pd.read_excel("../totalData.xlsx")
+Q = 1000
+
