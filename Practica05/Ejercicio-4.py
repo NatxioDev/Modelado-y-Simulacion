@@ -132,7 +132,7 @@ def realizarPrueba():
 
     dataY = fileData.iloc[:, 0:1]
     dataX = fileData.iloc[:, 1:3]
-
+    print("adada",dataX)
     matrizX = getMatriz(dataX)
     matrizX = np.insert(matrizX, 0, 1, axis=1)
 
@@ -146,11 +146,10 @@ def realizarPrueba():
     C = np.linalg.inv(MT_X_M)
 
     aux = np.matmul(C, matrizXTranspuesta)
-
     BetaS = (np.matmul(aux, matrizY))
-
+    print(BetaS)
     YS = np.matmul(matrizX, BetaS)
-
+    print(YS)
     SumY_YS = (((matrizY - YS) * (matrizY - YS)).sum())
     div = (len(dataY) - len(dataX.columns))
 
